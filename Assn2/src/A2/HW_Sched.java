@@ -28,9 +28,14 @@ class Assignment implements Comparator<Assignment>{
 	@Override
 	public int compare(Assignment a1, Assignment a2) {
 		//YOUR CODE GOES HERE, DONT FORGET TO EDIT THE RETURN STATEMENT
-		
-		
-		return 0;
+		int output=0;
+		if(a1.weight > a2.weight) //a1 has greater weight, it should appear before
+			output=-1;
+		else if (a1.weight < a2.weight)	//a2 has greater weight
+			output=1;	
+		else
+			output=0;
+		return output;
 	}
 }
 
@@ -65,7 +70,18 @@ public class HW_Sched {
 		//Initializes the homeworkPlan, which you must fill out and output
 		int[] homeworkPlan = new int[Assignments.size()];
 		//YOUR CODE GOES HERE
-	
+		for(int i=0; i<homeworkPlan.length; i++)	//Start with all zero plan. Assume none will be completed initially
+			homeworkPlan[i]=0;
+
+		for(int time=1; time<=lastDeadline; time++){
+			if( (time-2) > Assignments.size())	//Make sure we don't schedule for longer than there are assignments 
+				break;
+			Assignment cur_hw=Assignments.get(time-1);
+			int index = cur_hw.number;
+			if( index >= homeworkPlan.length)	//Should never happen unless explicitly creating assignments
+				break;
+			homeworkPlan[index]=time;
+		}
 		
 		return homeworkPlan;
 	}

@@ -12,13 +12,11 @@ public class Kruskal{
     	
     	for(int i=0; i<edges.size(); i++){
     		if(IsSafe(sets,edges.get(i))){	//Check that the edge crosses a cut respecting the mst we are building
-    			mst.addEdge(edges.get(i));
-    			sets.union(edges.get(i).nodes[0], edges.get(i).nodes[1]);
-    		}	
-    				
-    	}
-        
-        return null;
+    			mst.addEdge(edges.get(i));	//Add the edge
+    			sets.union(edges.get(i).nodes[0], edges.get(i).nodes[1]);	//Merge the 2 sets
+    		}	   				
+    	}        
+        return mst;
     }
 
     public static Boolean IsSafe(DisjointSets p, Edge e){
